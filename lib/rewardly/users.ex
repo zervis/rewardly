@@ -27,8 +27,18 @@ defmodule Rewardly.Users do
     Repo.get_by(User, id: id)
   end
 
+  def update_user(%User{} = user, attrs) do
+    user
+    |> User.changeset(attrs)
+    |> Repo.update()
+  end
+
   def get_amount_of_rewards(user_id) do
     total = Repo.one(from p in Reward, where: p.user_id == ^user_id, select: sum(p.amount))
+  end
+
+  def change_user(%User{} = user, attrs \\ %{}) do
+    User.changeset(user, attrs)
   end
 
   ## Database getters

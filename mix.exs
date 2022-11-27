@@ -51,7 +51,8 @@ defmodule Rewardly.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:bodyguard, "~> 2.4"},
-      {:timex, "~> 3.0"}
+      {:timex, "~> 3.0"},
+      {:money, "~> 1.12"}
     ]
   end
 

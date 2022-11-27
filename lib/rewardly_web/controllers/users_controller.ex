@@ -13,11 +13,13 @@ defmodule RewardlyWeb.UsersController do
 
     def add_reward(conn, %{"reward" => reward_params, "users_id" => user_id}) do
       current_user = conn.assigns.current_user
-      changeset = Ecto.build_assoc(current_user, :rewards)
+      #changeset = Ecto.build_assoc(current_user, :rewards)
+   
       user =
           user_id
           |> Users.get_user!()
           |> Repo.preload([:rewards])
+
       case Users.add_reward(user_id, current_user, reward_params) do
           {:ok, _reward} ->
               conn
@@ -28,7 +30,7 @@ defmodule RewardlyWeb.UsersController do
               |> put_flash(:error, "Oops! Couldn't add reward!")
               |> redirect(to: Routes.users_path(conn, :show, user))
       end
-  end
+    end
 
   def show(conn, %{"id" => id}) do
       user =
@@ -38,6 +40,26 @@ defmodule RewardlyWeb.UsersController do
   
       changeset = Reward.changeset(%Reward{}, %{})
       render(conn, "show.html", user: user, changeset: changeset)
+  end
+
+  def edit(conn, %{"id" => id}) do
+    user = Users.get_user!(id)
+    changeset = Users.change_user(user)
+    render(conn, "edit.html", user: user, changeset: changeset)
+  end
+
+  def update(conn, %{"id" => id, "user" => user_params}) do
+    user = Users.get_user!(id)
+
+    case Users.update_user(user, user_params) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "Credit updated successfully.")
+        |> redirect(to: Routes.users_path(conn, :show, user))
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        render(conn, "edit.html", user: user, changeset: changeset)
+    end
   end
 
 end

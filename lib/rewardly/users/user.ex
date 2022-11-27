@@ -7,9 +7,16 @@ defmodule Rewardly.Users.User do
     field :password, :string, virtual: true, redact: true
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
+    field :credits, :integer
     has_many :rewards, Rewardly.Rewards.Reward
 
     timestamps()
+  end
+
+  def changeset(user, attrs) do
+    user
+    |> cast(attrs, [:credits, :id])
+    |> validate_required([:credits, :id])
   end
 
   @doc """
@@ -29,6 +36,7 @@ defmodule Rewardly.Users.User do
       validations on a LiveView form), this option can be set to `false`.
       Defaults to `true`.
   """
+
   def registration_changeset(user, attrs, opts \\ []) do
     user
     |> cast(attrs, [:email, :password])
