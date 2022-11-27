@@ -8,6 +8,12 @@ defmodule Rewardly.Users do
 
   alias Rewardly.Users.{User, UserToken, UserNotifier}
 
+
+  def list_users() do
+    query = User |> order_by(desc: :id)
+    Repo.all(query)
+  end
+  
   ## Database getters
 
   @doc """
