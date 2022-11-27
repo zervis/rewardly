@@ -1,0 +1,6 @@
+<h1>Rewards</h1>
+
+<%= for reward <- @rewards do %>
+  <h3><%= reward.amount %> for <%= reward.user.email %>  by <%= reward.by.email %></h3>
+  <hr>
+<% end %>

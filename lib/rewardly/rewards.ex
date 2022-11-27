@@ -18,7 +18,11 @@ defmodule Rewardly.Rewards do
 
   """
   def list_rewards do
-    Repo.all(Reward)
+    query = Reward |> order_by(desc: :id)
+   
+    query
+    |> Repo.all()
+    |> Repo.preload([:user, :by])
   end
 
   @doc """

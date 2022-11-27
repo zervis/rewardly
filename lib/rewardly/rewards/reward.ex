@@ -5,9 +5,11 @@ defmodule Rewardly.Rewards.Reward do
   schema "rewards" do
     field :amount, :integer
     field :title, :string
-    field :user_id, :id
-    field :by_id, :id
-
+    #field :user_id, :id
+    #field :by_id, :id
+    belongs_to(:user, Rewardly.Users.User)
+    belongs_to(:by, Rewardly.Users.User)
+    
     timestamps()
   end
 
