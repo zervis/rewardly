@@ -1,0 +1,6 @@
+<%= @user.email %>
+
+<%= render "rewards.html", rewards: @user.rewards %>
+
+<%= render "reward_form.html", user: @user, changeset: @changeset, action:
+Routes.users_users_path(@conn, :add_reward, @user) %>

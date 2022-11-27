@@ -16,7 +16,7 @@ defmodule Rewardly.Rewards.Reward do
   @doc false
   def changeset(reward, attrs) do
     reward
-    |> cast(attrs, [:title, :amount])
-    |> validate_required([:title, :amount])
+    |> cast(attrs, [:user_id, :amount, :by_id])
+    |> validate_required([:user_id, :amount])
   end
 end

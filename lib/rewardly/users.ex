@@ -5,6 +5,8 @@ defmodule Rewardly.Users do
 
   import Ecto.Query, warn: false
   alias Rewardly.Repo
+  alias Rewardly.Rewards
+  alias Rewardly.Rewards.Reward
 
   alias Rewardly.Users.{User, UserToken, UserNotifier}
 
@@ -13,7 +15,21 @@ defmodule Rewardly.Users do
     query = User |> order_by(desc: :id)
     Repo.all(query)
   end
-  
+
+  def add_reward(user_id, reward_params) do
+    reward_params
+    |> Map.put("user_id", user_id)
+    |> Rewards.create_reward()
+  end
+
+  def get_user!(id) do
+    Repo.get_by(User, id: id)
+  end
+
+  def get_amount_of_rewards(user_id) do
+    total = Repo.one(from p in Reward, where: p.user_id == ^user_id, select: sum(p.amount))
+  end
+
   ## Database getters
 
   @doc """
