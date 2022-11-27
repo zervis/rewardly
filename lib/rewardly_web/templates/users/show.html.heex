@@ -1,5 +1,7 @@
 <%= @user.email %>
 
+<%= get_rewards_amount_this_month(@user.id) %> in rewards this month, <%= get_rewards_amount(@user.id) %> in rewards total, credits: <%= @user.credits %>
+
 <%= render "rewards.html", rewards: @user.rewards %>
 
 <%= render "reward_form.html", user: @user, changeset: @changeset, action:

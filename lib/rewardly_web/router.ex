@@ -84,6 +84,8 @@ defmodule RewardlyWeb.Router do
     resources "/users", UsersController do
       post "/reward", UsersController, :add_reward
     end
+
+    resources "/rewards", RewardsController
   end
 
   scope "/", RewardlyWeb do

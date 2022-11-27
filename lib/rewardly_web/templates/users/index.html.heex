@@ -1,6 +1,7 @@
 <h1>Users</h1>
 
 <%= for user <- @users do %>
-  <h3><%= user.email %> - <%= get_rewards_amount(user.id) %> in rewards total, credits: <%= user.credits %>         <span><%= link "Edit", to: Routes.users_path(@conn, :edit, user) %></span> <span><%= link "Add reward", to: Routes.users_path(@conn, :show, user) %></span></h3>
+  <h3><%= user.email %></h3>
+  <%= get_rewards_amount_this_month(user.id) %> in rewards this month, <%= get_rewards_amount(user.id) %> in rewards total, credits: <%= user.credits %>         <span><%= link "Edit", to: Routes.users_path(@conn, :edit, user) %></span> <span><%= link "Add reward", to: Routes.users_path(@conn, :show, user) %></span>
   <hr>
 <% end %>

@@ -15,9 +15,7 @@
         <nav>
           <%= render "_user_menu.html", assigns %>
         </nav>
-        <a href="localhost:4000" class="phx-logo">
-          <img src={Routes.static_path(@conn, "/images/rewardly.png")} alt="Rewardly Logo"/>
-        </a>
+        <%= link "Rewardly", to: Routes.page_path(@conn, :index) %>
       </section>
     </header>
     <%= @inner_content %>
