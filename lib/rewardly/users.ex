@@ -16,9 +16,10 @@ defmodule Rewardly.Users do
     Repo.all(query)
   end
 
-  def add_reward(user_id, reward_params) do
+  def add_reward(user_id, current_user, reward_params) do
     reward_params
     |> Map.put("user_id", user_id)
+    |> Map.put("by_id", current_user.id)
     |> Rewards.create_reward()
   end
 

@@ -12,11 +12,13 @@ defmodule RewardlyWeb.UsersController do
     end
 
     def add_reward(conn, %{"reward" => reward_params, "users_id" => user_id}) do
+      current_user = conn.assigns.current_user
+      changeset = Ecto.build_assoc(current_user, :rewards)
       user =
           user_id
           |> Users.get_user!()
           |> Repo.preload([:rewards])
-      case Users.add_reward(user_id, reward_params) do
+      case Users.add_reward(user_id, current_user, reward_params) do
           {:ok, _reward} ->
               conn
               |> put_flash(:info, "Added reward!")
