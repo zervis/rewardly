@@ -1,15 +1,37 @@
-<h3>Report</h3>
-
 <% date_with_time = @date <> " 00:00:00" 
- date = NaiveDateTime.from_iso8601!(date_with_time)
-%>
-<h3><%= Timex.month_name(date.month) %> <%= date.year %></h3>
-<%= for reward <- @rewards do %>
+ date = NaiveDateTime.from_iso8601!(date_with_time) %>
 
-    
-    <%= get_rewards_amount_month(date, reward.user_id) %> 
-    <%= reward.user.email %>
-    <br>
+<div class="w-full max-w-md p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex items-center justify-between mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
+<%= Timex.month_name(date.month) %> <%= date.year %></h5>
+        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+            <%= link "Back", to: Routes.reports_path(@conn, :index) %>
+        </a>
+   </div>
+   <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+        <%= for reward <- @rewards do %>
+            <li class="py-3 sm:py-4">
+                <div class="flex items-center space-x-4">
+                    <!--<div class="flex-shrink-0">
+                        <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
+                    </div>-->
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                            Neil Sims
+                        </p>
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">          
+                             <%= reward.user.email %>
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                          <%= get_rewards_amount_month(date, reward.user_id) %> 
+                    </div>
+                </div>
+            </li>
 
-<% end %>
-<span><%= link "Back", to: Routes.reports_path(@conn, :index) %></span>
+            <% end %>
+        </ul>
+   </div>
+</div>

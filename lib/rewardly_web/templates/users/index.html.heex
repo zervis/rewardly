@@ -1,7 +1,8 @@
-<h1>Users</h1>
-
 <%= for user <- @users do %>
-  <h3><%= user.email %></h3>
-  <%= get_rewards_amount_this_month(user.id) %> in rewards this month, <%= get_rewards_amount(user.id) %> in rewards total, credits: <%= user.credits %>         <span><%= link "Edit credits", to: Routes.users_path(@conn, :edit, user) %></span> <span><%= link "Add reward", to: Routes.users_path(@conn, :show, user) %></span>
-  <hr>
+<a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= user.email %></h5>
+    <p class="font-normal text-gray-700 dark:text-gray-400">  <%= get_rewards_amount_this_month(user.id) %> in rewards this month, <%= get_rewards_amount(user.id) %> in rewards total, credits: <%= user.credits %>         <span><%= link "Edit credits", to: Routes.users_path(@conn, :edit, user) %></span> <span><%= link "Add reward", to: Routes.users_path(@conn, :show, user) %></span>
+</p>
+</a>
+
 <% end %>

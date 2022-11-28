@@ -52,7 +52,7 @@ defmodule Rewardly.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:bodyguard, "~> 2.4"},
       {:timex, "~> 3.0"},
-      {:money, "~> 1.12"}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
     ]
   end
 
@@ -68,7 +68,8 @@ defmodule Rewardly.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
-      "assets.deploy": ["esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["esbuild default --minify", "phx.digest"],
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
     ]
   end
 end
