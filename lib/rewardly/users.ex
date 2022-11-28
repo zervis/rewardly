@@ -17,6 +17,7 @@ defmodule Rewardly.Users do
   end
 
   def add_reward(user_id, current_user, reward_params) do
+
     reward_params
     |> Map.put("user_id", user_id)
     |> Map.put("by_id", current_user.id)

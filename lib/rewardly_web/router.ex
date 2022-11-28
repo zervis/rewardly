@@ -86,6 +86,7 @@ defmodule RewardlyWeb.Router do
     end
 
     resources "/rewards", RewardsController
+    resources "/reports", ReportsController
   end
 
   scope "/", RewardlyWeb do

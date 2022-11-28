@@ -1,0 +1,9 @@
+<h1>Reports</h1>
+
+<%= for month <- @months do %>
+<% naive = month.inserted_at %>
+<% rid = Date.to_string(naive) %>
+<h3><%= Timex.month_name(naive.month) %> <%= naive.year %> <span><%= link "Show report", to: Routes.reports_path(@conn, :show, rid) %></span></h3>
+<% end %>
+
+<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>

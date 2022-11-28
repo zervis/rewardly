@@ -4,3 +4,5 @@
   <h3><%= reward.amount %> for <%= reward.user.email %>  by <%= reward.by.email %> <span><%= link "Edit reward", to: Routes.rewards_path(@conn, :edit, reward) %></span> <%= link "Delete", to: Routes.rewards_path(@conn, :delete, reward), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></h3>
   <hr>
 <% end %>
+
+<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>

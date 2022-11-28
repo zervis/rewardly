@@ -1,0 +1,15 @@
+<h3>Report</h3>
+
+<% date_with_time = @date <> " 00:00:00" 
+ date = NaiveDateTime.from_iso8601!(date_with_time)
+%>
+<h3><%= Timex.month_name(date.month) %> <%= date.year %></h3>
+<%= for reward <- @rewards do %>
+
+    
+    <%= get_rewards_amount_month(date, reward.user_id) %> 
+    <%= reward.user.email %>
+    <br>
+
+<% end %>
+<span><%= link "Back", to: Routes.reports_path(@conn, :index) %></span>

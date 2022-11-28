@@ -13,8 +13,7 @@ defmodule RewardlyWeb.UsersController do
 
     def add_reward(conn, %{"reward" => reward_params, "users_id" => user_id}) do
       current_user = conn.assigns.current_user
-      #changeset = Ecto.build_assoc(current_user, :rewards)
-   
+ 
       user =
           user_id
           |> Users.get_user!()
