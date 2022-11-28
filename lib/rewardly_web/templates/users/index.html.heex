@@ -1,8 +1,16 @@
 <%= for user <- @users do %>
-<a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= user.email %></h5>
-    <p class="font-normal text-gray-700 dark:text-gray-400">  <%= get_rewards_amount_this_month(user.id) %> in rewards this month, <%= get_rewards_amount(user.id) %> in rewards total, credits: <%= user.credits %>         <span><%= link "Edit credits", to: Routes.users_path(@conn, :edit, user) %></span> <span><%= link "Add reward", to: Routes.users_path(@conn, :show, user) %></span>
-</p>
-</a>
+
+
+<div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex flex-col items-center pb-10">
+        <!--<img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/docs/images/people/profile-picture-3.jpg" alt="Bonnie image"/>-->
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><%= user.name %> <%= user.surname %></h5>
+        <span class="text-sm text-gray-500 dark:text-gray-400"><%= user.email %></span>
+        <div class="flex mt-4 space-x-3 md:mt-6">
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><%= link "Add reward", to: Routes.users_path(@conn, :show, user) %></a>
+            <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"><%= link "Edit credits", to: Routes.users_path(@conn, :edit, user) %></a>
+        </div>
+    </div>
+</div>
 
 <% end %>
