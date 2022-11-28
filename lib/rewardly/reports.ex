@@ -19,11 +19,6 @@ defmodule Rewardly.Reports do
     |> Repo.preload([:user, :by])
   end
 
-  def list_users() do
-    query = User |> order_by(desc: :id)
-    Repo.all(query)
-  end
-
   def list_reports(date) do
 
     date_with_time = date <> " 00:00:00"
@@ -35,16 +30,6 @@ defmodule Rewardly.Reports do
     query
     |> Repo.all()
     |> Repo.preload([:user])
-  end
-
-  def get_report!(date) do
-    date_with_time = date <> "-01 00:00:00"
-    report_date = NaiveDateTime.from_iso8601!(date_with_time)
-    query = from(p in Reward, where: p.inserted_at == ^report_date)
-    
-    query
-    |> Repo.all()
-    |> Repo.preload([:user, :by])
   end
 
   def get_amount_of_rewards(user_id) do

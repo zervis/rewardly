@@ -34,16 +34,6 @@ defmodule Rewardly.Users do
     |> Repo.update()
   end
 
-  def get_amount_of_rewards(user_id) do
-    total = Repo.one(from p in Reward, where: p.user_id == ^user_id, select: sum(p.amount))
-  end
-
-  def get_amount_of_rewards_this_month(user_id) do
-    current_date = Date.utc_today()
-    current_month = current_date.month
-    month_total = Repo.one(from p in Reward, where: p.user_id == ^user_id and ^current_month == fragment("date_part('month', ?)", p.inserted_at), select: sum(p.amount))
-  end
-
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
   end
