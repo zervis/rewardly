@@ -5,6 +5,7 @@ defmodule RewardlyWeb.UsersController do
     alias Rewardly.Rewards
     alias Rewardly.Rewards.Reward
     alias Rewardly.Repo
+    alias RewardlyWeb.UserAuth
   
     def index(conn, _params) do
       users = Users.list_users()
@@ -59,6 +60,12 @@ defmodule RewardlyWeb.UsersController do
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> put_flash(:info, "Logged out successfully.")
+    |> UserAuth.log_out_user()
   end
 
 end

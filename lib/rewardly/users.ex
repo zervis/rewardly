@@ -19,9 +19,6 @@ defmodule Rewardly.Users do
   def add_reward(user_id, current_user, reward_params) do
     %{"amount" => amount} = reward_params
     donor = Repo.get!(User, current_user.id)
-    IO.inspect(donor)
-    IO.inspect(amount)
-    IO.inspect(donor.credits)
     credit = String.to_integer(amount)
     if (donor.credits < credit) do
       raise ArgumentError, message: "User credits to low to donate"
