@@ -17,15 +17,24 @@ defmodule Rewardly.Users do
   end
 
   def add_reward(user_id, current_user, reward_params) do
+    %{"amount" => amount} = reward_params
+    donor = Repo.get!(User, current_user.id)
+    IO.inspect(donor)
+    IO.inspect(amount)
+    IO.inspect(donor.credits)
+    credit = String.to_integer(amount)
+    if (donor.credits < credit) do
+      raise ArgumentError, message: "User credits to low to donate"
+    else
+    updated_credits = donor.credits - credit
+    user_map = Map.put(%{}, :credits, updated_credits)
+    update_user(current_user, user_map)
 
     reward_params
     |> Map.put("user_id", user_id)
     |> Map.put("by_id", current_user.id)
     |> Rewards.create_reward()
-  end
-
-  def get_user!(id) do
-    Repo.get_by(User, id: id)
+    end
   end
 
   def update_user(%User{} = user, attrs) do
