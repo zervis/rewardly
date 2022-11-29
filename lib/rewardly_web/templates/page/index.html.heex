@@ -12,13 +12,15 @@
   <li>Rewards total: <%= get_rewards_amount(@current_user.id) %></li>
   <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
   <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
-<% else %>
-  <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
-  <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
-<% end %>
-
+  <%= if @current_user.role == "admin" do %>
 Rewardly has <%= users_count() %> users, credits will be reassigned
 
 <% date = Timex.shift(DateTime.utc_now(), months: 1) %>
 <%= new_date = Date.beginning_of_month(date) %>
 (<%= Timex.from_now(new_date) %>)
+
+<% end %>
+<% else %>
+  <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
+  <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
+<% end %>
