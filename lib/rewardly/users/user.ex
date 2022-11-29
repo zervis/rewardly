@@ -10,7 +10,7 @@ defmodule Rewardly.Users.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
     field :credits, :integer
-    field :role, :string
+    field :role, :string, default: "member"
     has_many :rewards, Rewardly.Rewards.Reward
 
     timestamps()
