@@ -7,6 +7,9 @@
   <li><%= @current_user.name %> <%= @current_user.surname %></li>
   <li><%= @current_user.email %></li>
   <li>Credits: <%= @current_user.credits %></li>
+  <li>Role: <%= @current_user.role %></li>
+  <li>Reward this month: <%= get_rewards_amount_this_month(@current_user.id) %></li>
+  <li>Rewards total: <%= get_rewards_amount(@current_user.id) %></li>
   <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
   <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
 <% else %>
@@ -14,7 +17,7 @@
   <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
 <% end %>
 
-Rewardly has <%= users_count() %> users, credits will be reassigned   
+Rewardly has <%= users_count() %> users, credits will be reassigned
 
 <% date = Timex.shift(DateTime.utc_now(), months: 1) %>
 <%= new_date = Date.beginning_of_month(date) %>

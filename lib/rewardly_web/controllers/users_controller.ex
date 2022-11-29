@@ -1,6 +1,6 @@
 defmodule RewardlyWeb.UsersController do
     use RewardlyWeb, :controller
-  
+
     alias Rewardly.Users
     alias Rewardly.Rewards
     alias Rewardly.Rewards.Reward
@@ -8,7 +8,7 @@ defmodule RewardlyWeb.UsersController do
     alias RewardlyWeb.UserAuth
     alias Rewardly.Users.UserNotifier
     alias Rewardly.Mailer
-  
+
     def index(conn, _params) do
       users = Users.list_users()
       render(conn, "index.html", users: users)
@@ -16,7 +16,7 @@ defmodule RewardlyWeb.UsersController do
 
     def add_reward(conn, %{"reward" => reward_params, "users_id" => user_id}) do
       current_user = conn.assigns.current_user
- 
+
       user =
           user_id
           |> Users.get_user!()
@@ -41,7 +41,7 @@ defmodule RewardlyWeb.UsersController do
           id
           |> Users.get_user!
           |> Repo.preload([:rewards])
-  
+
       changeset = Reward.changeset(%Reward{}, %{})
       render(conn, "show.html", user: user, changeset: changeset)
   end
@@ -54,15 +54,22 @@ defmodule RewardlyWeb.UsersController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Users.get_user!(id)
+    current_user = conn.assigns.current_user
 
-    case Users.update_user(user, user_params) do
-      {:ok, user} ->
-        conn
-        |> put_flash(:info, "Credit updated successfully.")
-        |> redirect(to: Routes.users_path(conn, :show, user))
+    if user.role == "admin" do
+      case Users.update_user(user, user_params) do
+        {:ok, user} ->
+          conn
+          |> put_flash(:info, "Credit updated successfully.")
+          |> redirect(to: Routes.users_path(conn, :show, user))
 
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", user: user, changeset: changeset)
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "edit.html", user: user, changeset: changeset)
+      end
+    else
+      conn
+      |> put_flash(:error, "Users can't update credits")
+      |> redirect(to: Routes.users_path(conn, :show, user))
     end
   end
 

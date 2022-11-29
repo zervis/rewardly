@@ -3,13 +3,12 @@ defmodule Rewardly.Reports do
   The Users context.
   """
 
+  @behaviour Bodyguard.Policy
+
   import Ecto.Query, warn: false
 
   alias Rewardly.Repo
-  alias Rewardly.Rewards
   alias Rewardly.Rewards.Reward
-
-  alias Rewardly.Users.{User, UserToken, UserNotifier}
 
 
   def list_months do
@@ -36,16 +35,19 @@ defmodule Rewardly.Reports do
     total = Repo.one(from p in Reward, where: p.user_id == ^user_id, select: sum(p.amount))
   end
 
+
   def get_amount_of_rewards_month(date, user_id) do
     current_month = date.month
     current_year = date.year
     month_total = Repo.one(from p in Reward, where: p.user_id == ^user_id and ^current_year == fragment("date_part('year', ?)", p.inserted_at) and ^current_month == fragment("date_part('month', ?)", p.inserted_at), select: sum(p.amount))
   end
 
+
   def get_amount_of_rewards_this_month(user_id) do
     current_date = Date.utc_today()
     current_month = current_date.month
-    month_total = Repo.one(from p in Reward, where: p.user_id == ^user_id and ^current_month == fragment("date_part('month', ?)", p.inserted_at), select: sum(p.amount))
+    current_year = current_date.year
+    month_total = Repo.one(from p in Reward, where: p.user_id == ^user_id and ^current_month == fragment("date_part('month', ?)", p.inserted_at) and ^current_year == fragment("date_part('year', ?)", p.inserted_at), select: sum(p.amount))
   end
 
 end

@@ -10,6 +10,7 @@ defmodule Rewardly.Users.User do
     field :hashed_password, :string, redact: true
     field :confirmed_at, :naive_datetime
     field :credits, :integer
+    field :role, :string
     has_many :rewards, Rewardly.Rewards.Reward
 
     timestamps()
@@ -19,6 +20,12 @@ defmodule Rewardly.Users.User do
     user
     |> cast(attrs, [:credits, :id])
     |> validate_required([:credits, :id])
+  end
+
+  def reward_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:amount, :id])
+    |> validate_required([:amount, :id])
   end
 
   @doc """

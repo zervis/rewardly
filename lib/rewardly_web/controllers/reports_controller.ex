@@ -1,12 +1,10 @@
 defmodule RewardlyWeb.ReportsController do
     use RewardlyWeb, :controller
 
-    alias Rewardly.Users
     alias Rewardly.Reports
     alias Rewardly.Rewards
-    alias Rewardly.Rewards.Reward
-    alias Rewardly.Repo
-  
+
+
     def index(conn, _params) do
       users = Rewards.list_rewards()
       months = Reports.list_months()
@@ -14,10 +12,16 @@ defmodule RewardlyWeb.ReportsController do
     end
 
     def show(conn, %{"id" => date}) do
-          #users = Rewards.list_rewards()
+      current_user = conn.assigns.current_user
+
+      if current_user.role == "admin" do
           rewards = Reports.list_reports(date)
-      #changeset = Reward.changeset(%Reward{}, %{})
-      render(conn, "show.html", date: date, rewards: rewards)
+          render(conn, "show.html", date: date, rewards: rewards)
+      else
+        conn
+        |> put_flash(:error, "Users can't view reports")
+        |> redirect(to: Routes.page_path(conn, :index))
+      end
   end
 
 
