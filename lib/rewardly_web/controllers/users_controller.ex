@@ -6,6 +6,8 @@ defmodule RewardlyWeb.UsersController do
     alias Rewardly.Rewards.Reward
     alias Rewardly.Repo
     alias RewardlyWeb.UserAuth
+    alias Rewardly.Users.UserNotifier
+    alias Rewardly.Mailer
   
     def index(conn, _params) do
       users = Users.list_users()
@@ -22,6 +24,8 @@ defmodule RewardlyWeb.UsersController do
 
       case Users.add_reward(user_id, current_user, reward_params) do
           {:ok, _reward} ->
+              UserNotifier.reward_info(user) |> Mailer.deliver()
+
               conn
               |> put_flash(:info, "Added reward!")
               |> redirect(to: Routes.users_path(conn, :show, user))

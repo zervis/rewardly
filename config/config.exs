@@ -27,7 +27,7 @@ config :rewardly, RewardlyWeb.Endpoint,
 config :rewardly, Rewardly.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
-config :swoosh, :api_client, false
+config :swoosh, :api_client, Swoosh.ApiClient.Hackney
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -59,3 +59,7 @@ config :tailwind, version: "3.2.4", default: [
   ),
   cd: Path.expand("../assets", __DIR__)
 ]
+
+config :rewardly, Rewardly.Mailer,
+adapter: Swoosh.Adapters.Sendgrid,
+api_key: "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"

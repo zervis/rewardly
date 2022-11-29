@@ -44,7 +44,7 @@ defmodule Rewardly.MixProject do
       {:floki, ">= 0.30.0", only: :test},
       {:phoenix_live_dashboard, "~> 0.6"},
       {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
-      {:swoosh, "~> 1.3"},
+      {:swoosh, "~> 1.8"},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.18"},
@@ -52,7 +52,8 @@ defmodule Rewardly.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:bodyguard, "~> 2.4"},
       {:timex, "~> 3.0"},
-      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev}
+      {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
+      {:hackney, "~> 1.18.0"}
     ]
   end
 

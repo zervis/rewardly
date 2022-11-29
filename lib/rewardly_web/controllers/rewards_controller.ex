@@ -5,6 +5,7 @@ defmodule RewardlyWeb.RewardsController do
     alias Rewardly.Rewards
     alias Rewardly.Rewards.Reward
     alias Rewardly.Repo
+
   
     def index(conn, _params) do
       rewards = Rewards.list_rewards()
