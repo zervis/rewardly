@@ -5,5 +5,6 @@ defmodule Rewardly.Workers.MonthlyWorker do
 
   def perform(_job) do
     Rewardly.Users.update_all_credits()
+    :ok
   end
 end
