@@ -62,4 +62,14 @@ config :tailwind, version: "3.2.4", default: [
 
 config :rewardly, Rewardly.Mailer,
 adapter: Swoosh.Adapters.Sendgrid,
-api_key: "set api at sendgrid"
+api_key: "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"
+config :rewardly, Oban,
+  repo: Rewardly.Repo,
+  plugins: [Oban.Plugins.Pruner],
+  queues: [default: 10],
+  plugins: [
+    {Oban.Plugins.Cron,
+     crontab: [
+       {"@hourly", Rewardly.MonthlyWorker}
+     ]}
+  ]

@@ -4,12 +4,12 @@ defmodule Rewardly.Rewards.Reward do
   alias Rewardly.Users.User
   schema "rewards" do
     field :amount, :integer
-    field :title, :string
+    #field :title, :string
     #field :user_id, :id
     #field :by_id, :id
     belongs_to(:user, User)
     belongs_to(:by, User)
-    
+
     timestamps()
   end
 

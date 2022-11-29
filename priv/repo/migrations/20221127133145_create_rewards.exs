@@ -3,7 +3,6 @@ defmodule Rewardly.Repo.Migrations.CreateRewards do
 
   def change do
     create table(:rewards) do
-      add :title, :string
       add :amount, :integer
       add :user_id, references(:users, on_delete: :nothing)
       add :by_id, references(:users, on_delete: :nothing)

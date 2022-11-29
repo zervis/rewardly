@@ -53,7 +53,8 @@ defmodule Rewardly.MixProject do
       {:bodyguard, "~> 2.4"},
       {:timex, "~> 3.0"},
       {:tailwind, "~> 0.1", runtime: Mix.env() == :dev},
-      {:hackney, "~> 1.18.0"}
+      {:hackney, "~> 1.18.0"},
+      {:oban, "~> 2.13"}
     ]
   end
 

@@ -10,6 +10,7 @@ defmodule Rewardly.Application do
     children = [
       # Start the Ecto repository
       Rewardly.Repo,
+      {Oban, Application.fetch_env!(:rewardly, Oban)},
       # Start the Telemetry supervisor
       RewardlyWeb.Telemetry,
       # Start the PubSub system
@@ -18,6 +19,7 @@ defmodule Rewardly.Application do
       RewardlyWeb.Endpoint
       # Start a worker by calling: Rewardly.Worker.start_link(arg)
       # {Rewardly.Worker, arg}
+
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

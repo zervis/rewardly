@@ -24,7 +24,7 @@ defmodule RewardlyWeb.UsersController do
 
       case Users.add_reward(user_id, current_user, reward_params) do
           {:ok, _reward} ->
-              UserNotifier.reward_info(user) |> Mailer.deliver()
+              UserNotifier.reward_info(user, current_user, reward_params) |> Mailer.deliver()
 
               conn
               |> put_flash(:info, "Added reward!")

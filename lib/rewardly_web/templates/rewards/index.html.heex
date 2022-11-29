@@ -5,7 +5,7 @@
             <span class="flex absolute -left-6 justify-center items-center w-12 h-12 bg-blue-200 rounded-full ring-14 ring-white dark:ring-gray-900 dark:bg-blue-900">
                 <%= reward.amount %>
             </span>
-            <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-white"> <%= reward.user.name %> <%= reward.user.surname %> <%= link "Edit reward", to: Routes.rewards_path(@conn, :edit, reward), class: "bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3" %>
+            <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-gray-900"> <%= reward.user.name %> <%= reward.user.surname %> <%= link "Edit reward", to: Routes.rewards_path(@conn, :edit, reward), class: "bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3" %>
                 <%= link "Delete", to: Routes.rewards_path(@conn, :delete, reward), method: :delete, data: [confirm: "Are you sure?"], class: "bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-blue-800 ml-3" %>
             </h3>
             <p class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500"> <%= reward.user.email %></p>

@@ -3,13 +3,15 @@ defmodule Rewardly.Users.UserNotifier do
 
   alias Rewardly.Mailer
 
-  def reward_info(user) do
+  def reward_info(user, current_user, reward_params) do
+    %{"amount" => amount} = reward_params
+
     new()
     |> to({user.name, user.email})
     |> from({"Rewardly", "zervis@gmail.com"})
-    |> subject("New reward!")
-    |> html_body("<h1>Hello #{user.name}</h1> new reward!")
-    |> text_body("Hello #{user.name}\n New Reward!")
+    |> subject("You got a new #{amount} reward!")
+    |> html_body("<h1>Hello #{user.name} #{user.surname}</h1> You got a new #{amount} reward from #{current_user.name} #{current_user.surname}!")
+    |> text_body("Hello #{user.name} #{user.surname}\n You got a new #{amount} reward from #{current_user.name} #{current_user.surname}!")
   end
 
   # Delivers the email using the application mailer.
