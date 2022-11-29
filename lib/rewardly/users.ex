@@ -16,6 +16,10 @@ defmodule Rewardly.Users do
     Repo.all(query)
   end
 
+  def get_users_count() do
+    Repo.aggregate(User, :count)
+  end
+
   def add_reward(user_id, current_user, reward_params) do
     %{"amount" => amount} = reward_params
     donor = Repo.get!(User, current_user.id)

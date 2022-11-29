@@ -1,37 +1,34 @@
 <% date_with_time = @date <> " 00:00:00" 
  date = NaiveDateTime.from_iso8601!(date_with_time) %>
 
-<div class="w-full max-w-md p-4 bg-white border rounded-lg shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <div class="flex items-center justify-between mb-4">
-        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">
-<%= Timex.month_name(date.month) %> <%= date.year %></h5>
-        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-            <%= link "Back", to: Routes.reports_path(@conn, :index) %>
-        </a>
-   </div>
-   <div class="flow-root">
-        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
-        <%= for reward <- @rewards do %>
-            <li class="py-3 sm:py-4">
-                <div class="flex items-center space-x-4">
-                    <!--<div class="flex-shrink-0">
-                        <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-1.jpg" alt="Neil image">
-                    </div>-->
-                    <div class="flex-1 min-w-0">
-                        <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                            <%= reward.user.name %> <%= reward.user.surname %>
-                        </p>
-                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">          
-                             <%= reward.user.email %>
-                        </p>
-                    </div>
-                    <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                          <%= get_rewards_amount_month(date, reward.user_id) %> 
-                    </div>
-                </div>
-            </li>
+<h5> <%= Timex.month_name(date.month) %> <%= date.year %></h5>
 
-            <% end %>
-        </ul>
-   </div>
+<div class="overflow-x-auto relative shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="py-3 px-6">
+                    User
+                </th>
+                <th scope="col" class="py-3 px-6">
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+          <%= for reward <- @rewards do %>
+            <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <%= reward.user.name %> <%= reward.user.surname %>
+                </th>
+
+                <td class="py-4 px-6">
+                    <%= get_rewards_amount_month(date, reward.user_id) %> 
+                </td>
+            </tr>
+<% end %>
+
+
+        </tbody>
+    </table>
 </div>
