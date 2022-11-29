@@ -3,7 +3,7 @@ defmodule Rewardly.Repo.Migrations.AddRolesToUser do
 
   def change do
     alter table("users") do
-      add :role, :string, default: "user"
+      add :role, :string, default: "member"
     end
   end
 end
