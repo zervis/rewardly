@@ -62,4 +62,4 @@ config :tailwind, version: "3.2.4", default: [
 
 config :rewardly, Rewardly.Mailer,
 adapter: Swoosh.Adapters.Sendgrid,
-api_key: "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"
+api_key: "set api at sendgrid"
