@@ -2,7 +2,6 @@ defmodule RewardlyWeb.UsersController do
     use RewardlyWeb, :controller
 
     alias Rewardly.Users
-    alias Rewardly.Rewards
     alias Rewardly.Rewards.Reward
     alias Rewardly.Repo
     alias RewardlyWeb.UserAuth
@@ -54,7 +53,7 @@ defmodule RewardlyWeb.UsersController do
 
   def update(conn, %{"id" => id, "user" => user_params}) do
     user = Users.get_user!(id)
-    current_user = conn.assigns.current_user
+    #current_user = conn.assigns.current_user
 
     if user.role == "admin" do
       case Users.update_user(user, user_params) do

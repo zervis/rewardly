@@ -37,7 +37,7 @@ defmodule RewardlyWeb.RewardsController do
         {:ok, reward} ->
           conn
           |> put_flash(:info, "Reward updated successfully.")
-          |> redirect(to: Routes.rewards_path(conn, :edit, reward))
+          |> redirect(to: Routes.rewards_path(conn, :index))
 
         {:error, %Ecto.Changeset{} = changeset} ->
           render(conn, "edit.html", reward: reward, changeset: changeset)

@@ -6,7 +6,6 @@ defmodule Rewardly.Users do
   import Ecto.Query, warn: false
   alias Rewardly.Repo
   alias Rewardly.Rewards
-  alias Rewardly.Rewards.Reward
 
   alias Rewardly.Users.{User, UserToken, UserNotifier}
 

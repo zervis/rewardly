@@ -1,6 +1,6 @@
 defmodule RewardlyWeb.UsersView do
     use RewardlyWeb, :view
-    alias Rewardly.Users
+  
     alias Rewardly.Reports
 
     def get_rewards_amount(user_id) do
