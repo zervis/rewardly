@@ -13,9 +13,9 @@ defmodule Rewardly.Reports do
 
   def list_months do
     query = from(p in Reward, distinct: [fragment("date_part('year', ?)", p.inserted_at), fragment("date_part('month', ?)", p.inserted_at)], order_by: [{:desc, :inserted_at}])
+   
     query
     |> Repo.all()
-    |> Repo.preload([:user, :by])
   end
 
   def list_reports(date) do

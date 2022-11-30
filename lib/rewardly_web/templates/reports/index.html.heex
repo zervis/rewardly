@@ -18,15 +18,16 @@
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <% naive = month.inserted_at %>
-<% rid = Date.to_string(naive) %>
-<%= Timex.month_name(naive.month) %> <%= naive.year %> 
+                    <% end_of_month = Date.end_of_month(naive) %>
+                    <% rid = Date.to_string(end_of_month) %>
+                    <%= Timex.month_name(naive.month) %> <%= naive.year %> 
                 </th>
 
                 <td class="py-4 px-6">
                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><%= link "Show report", to: Routes.reports_path(@conn, :show, rid) %></a>
                 </td>
             </tr>
-<% end %>
+        <% end %>
 
 
         </tbody>
