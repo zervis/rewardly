@@ -2,7 +2,7 @@ defmodule Rewardly.Rewards do
   @moduledoc """
   The Rewards context.
   """
-  @behaviour Bodyguard.Policy
+  #@behaviour Bodyguard.Policy
 
   import Ecto.Query, warn: false
   alias Rewardly.Repo

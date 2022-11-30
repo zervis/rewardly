@@ -6,6 +6,7 @@ defmodule Rewardly.Users do
   import Ecto.Query, warn: false
   alias Rewardly.Repo
   alias Rewardly.Rewards
+  alias Rewardly.Rewards.Reward
 
   alias Rewardly.Users.{User, UserToken, UserNotifier}
 
@@ -21,6 +22,14 @@ defmodule Rewardly.Users do
 
   def update_all_credits() do
     Repo.update_all(User, set: [credits: 50])
+  end
+
+  def get_user_rewards(user) do
+    query = from(p in Reward, where: p.user_id == ^user, order_by: [desc: p.inserted_at])
+
+    query
+    |> Repo.all()
+    |> Repo.preload([:by])
   end
 
   def add_reward(user_id, current_user, reward_params) do

@@ -1,7 +1,6 @@
 defmodule RewardlyWeb.RewardsController do
     use RewardlyWeb, :controller
 
-    alias Rewardly.Users
     alias Rewardly.Rewards
     alias Rewardly.Rewards.Reward
     alias Rewardly.Repo

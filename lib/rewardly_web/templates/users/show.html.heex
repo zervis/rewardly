@@ -3,8 +3,9 @@
 
 <%= get_rewards_amount_this_month(@user.id) %> in rewards this month, <%= get_rewards_amount(@user.id) %> in rewards total, credits: <%= @user.credits %>
 
-
 <%= render "reward_form.html", user: @user, changeset: @changeset, action:
 Routes.users_users_path(@conn, :add_reward, @user) %>
 
-<%= render "rewards.html", rewards: @user.rewards %>
+	<%= for reward <- @rewards do %>
+		<%= reward.amount %> <%= Timex.from_now(reward.inserted_at) %> by <%= reward.by.name %> <%= reward.by.surname %><br>
+	<% end %>

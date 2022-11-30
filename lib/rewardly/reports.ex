@@ -12,8 +12,8 @@ defmodule Rewardly.Reports do
 
 
   def list_months do
-    query = from(p in Reward, distinct: [fragment("date_part('year', ?)", p.inserted_at), fragment("date_part('month', ?)", p.inserted_at)], order_by: [{:desc, :inserted_at}])
-   
+    query = from(p in Reward, distinct: [fragment("date_part('year', ?)", p.inserted_at), fragment("date_part('month', ?)", p.inserted_at)])
+
     query
     |> Repo.all()
   end
@@ -39,7 +39,7 @@ defmodule Rewardly.Reports do
   def get_amount_of_rewards_month(date, user_id) do
     current_month = date.month
     current_year = date.year
-    
+
     Repo.one(from p in Reward, where: p.user_id == ^user_id and ^current_year == fragment("date_part('year', ?)", p.inserted_at) and ^current_month == fragment("date_part('month', ?)", p.inserted_at), select: sum(p.amount))
   end
 
@@ -48,7 +48,7 @@ defmodule Rewardly.Reports do
     current_date = Date.utc_today()
     current_month = current_date.month
     current_year = current_date.year
-    
+
     Repo.one(from p in Reward, where: p.user_id == ^user_id and ^current_month == fragment("date_part('month', ?)", p.inserted_at) and ^current_year == fragment("date_part('year', ?)", p.inserted_at), select: sum(p.amount))
   end
 

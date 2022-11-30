@@ -41,8 +41,10 @@ defmodule RewardlyWeb.UsersController do
           |> Users.get_user!
           |> Repo.preload([:rewards])
 
+      rewards = Users.get_user_rewards(id)
+
       changeset = Reward.changeset(%Reward{}, %{})
-      render(conn, "show.html", user: user, changeset: changeset)
+      render(conn, "show.html", user: user, rewards: rewards, changeset: changeset)
   end
 
   def edit(conn, %{"id" => id}) do
