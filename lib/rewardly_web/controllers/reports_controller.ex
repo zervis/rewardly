@@ -22,6 +22,4 @@ defmodule RewardlyWeb.ReportsController do
       end
   end
 
-
-
 end
