@@ -1,7 +1,7 @@
 <%= form_for @changeset, @action, fn f -> %>
 	<div class="form-group">
 		<label>Amount</label>
-		<%= text_input f, :amount, class: "form-control" %>
+		<%= number_input f, :amount, class: "form-control" %>
 	</div>
 	<div class="form-group">
 		<%= submit "Add reward", class: "btn btn-primary" %>
