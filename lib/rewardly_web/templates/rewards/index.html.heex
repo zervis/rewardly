@@ -2,7 +2,7 @@
 <ol class="relative border-l border-gray-200 dark:border-gray-700">
     <%= for reward <- @rewards do %>
         <li class="mb-10 ml-12">
-            <span class="flex absolute -left-6 justify-center items-center w-12 h-12 bg-blue-200 rounded-full ring-14 ring-white dark:ring-gray-900 dark:bg-blue-900">
+            <span class="flex absolute -left-6 justify-center items-center w-12 h-12 bg-blue-200 rounded-full ring-14 ring-white dark:text-white dark:ring-gray-900 dark:bg-gray-900">
                 <%= reward.amount %>
             </span>
             <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900 dark:text-gray-900"> <%= link to: Routes.users_path(@conn, :show, reward.user.id) do %><%= reward.user.name %> <%= reward.user.surname %><% end %>
