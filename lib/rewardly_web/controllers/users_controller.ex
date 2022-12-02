@@ -38,31 +38,31 @@ defmodule RewardlyWeb.UsersController do
 
   def show(conn, %{"id" => id}) do
 
-    case user = Repo.get(User, id) do
-      user when not(is_nil(user)) -> 
+    case Repo.get(User, id) do
+      user when not(is_nil(user)) ->
         rewards = Users.get_user_rewards(id)
         changeset = Reward.changeset(%Reward{}, %{})
-        render(conn, "show.html", user: user, rewards: rewards, changeset: changeset)  
+        render(conn, "show.html", user: user, rewards: rewards, changeset: changeset)
 
-      _ ->  
+      _ ->
         conn
         |> put_flash(:error, "Oops! Couldn't find user!")
-        |> redirect(to: Routes.users_path(conn, :index)) 
+        |> redirect(to: Routes.users_path(conn, :index))
     end
 
   end
 
   def edit(conn, %{"id" => id}) do
 
-  case user = Repo.get(User, id) do
-    user when not(is_nil(user)) -> 
+  case Repo.get(User, id) do
+    user when not(is_nil(user)) ->
       changeset = Users.change_user(user)
-      render(conn, "edit.html", user: user, changeset: changeset)  
+      render(conn, "edit.html", user: user, changeset: changeset)
 
-    _ ->  
+    _ ->
       conn
       |> put_flash(:error, "Oops! Couldn't find user!")
-      |> redirect(to: Routes.users_path(conn, :index)) 
+      |> redirect(to: Routes.users_path(conn, :index))
     end
   end
 

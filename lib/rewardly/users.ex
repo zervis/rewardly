@@ -38,7 +38,7 @@ defmodule Rewardly.Users do
     credit = String.to_integer(amount)
     reciever = String.to_integer(user_id)
 
-    if (donor.credits < credit || current_user.id == reciever || credit == 0) do
+    if (donor.credits < credit || current_user.id == reciever || credit <= 0) do
       {:error, reward_params}
     else
       updated_credits = donor.credits - credit

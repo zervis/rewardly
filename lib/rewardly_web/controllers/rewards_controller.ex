@@ -33,7 +33,7 @@ defmodule RewardlyWeb.RewardsController do
 
     if user.role == "admin" do
       case Rewards.update_reward(reward, reward_params) do
-        {:ok, reward} ->
+        {:ok, _reward} ->
           conn
           |> put_flash(:info, "Reward updated successfully.")
           |> redirect(to: Routes.rewards_path(conn, :index))
