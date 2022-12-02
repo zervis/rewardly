@@ -12,7 +12,9 @@ defmodule Rewardly.RewardsFixtures do
       attrs
       |> Enum.into(%{
         amount: 42,
-        title: "some title"
+        title: "some title",
+        user_id: 1,
+        by_id: 2
       })
       |> Rewardly.Rewards.create_reward()
 

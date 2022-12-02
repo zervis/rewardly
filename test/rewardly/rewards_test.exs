@@ -34,7 +34,7 @@ defmodule Rewardly.RewardsTest do
 
     test "update_reward/2 with valid data updates the reward" do
       reward = reward_fixture()
-      update_attrs = %{amount: 43, title: "some updated title"}
+      update_attrs = %{amount: 43, title: "some updated title", user_id: 1, by_id: 2}
 
       assert {:ok, %Reward{} = reward} = Rewards.update_reward(reward, update_attrs)
       assert reward.amount == 43
