@@ -2,6 +2,7 @@ defmodule RewardlyWeb.UsersController do
     use RewardlyWeb, :controller
 
     alias Rewardly.Users
+    alias Rewardly.Users.User
     alias Rewardly.Rewards.Reward
     alias Rewardly.Repo
     alias RewardlyWeb.UserAuth
@@ -36,21 +37,33 @@ defmodule RewardlyWeb.UsersController do
     end
 
   def show(conn, %{"id" => id}) do
-      user =
-          id
-          |> Users.get_user!
-          |> Repo.preload([:rewards])
 
-      rewards = Users.get_user_rewards(id)
+    case user = Repo.get(User, id) do
+      user when not(is_nil(user)) -> 
+        rewards = Users.get_user_rewards(id)
+        changeset = Reward.changeset(%Reward{}, %{})
+        render(conn, "show.html", user: user, rewards: rewards, changeset: changeset)  
 
-      changeset = Reward.changeset(%Reward{}, %{})
-      render(conn, "show.html", user: user, rewards: rewards, changeset: changeset)
+      _ ->  
+        conn
+        |> put_flash(:error, "Oops! Couldn't find user!")
+        |> redirect(to: Routes.users_path(conn, :index)) 
+    end
+
   end
 
   def edit(conn, %{"id" => id}) do
-    user = Users.get_user!(id)
-    changeset = Users.change_user(user)
-    render(conn, "edit.html", user: user, changeset: changeset)
+
+  case user = Repo.get(User, id) do
+    user when not(is_nil(user)) -> 
+      changeset = Users.change_user(user)
+      render(conn, "edit.html", user: user, changeset: changeset)  
+
+    _ ->  
+      conn
+      |> put_flash(:error, "Oops! Couldn't find user!")
+      |> redirect(to: Routes.users_path(conn, :index)) 
+    end
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
