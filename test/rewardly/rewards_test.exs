@@ -8,7 +8,7 @@ defmodule Rewardly.RewardsTest do
 
     import Rewardly.RewardsFixtures
 
-    @invalid_attrs %{amount: nil, title: nil}
+    @invalid_attrs %{amount: nil, title: nil, user_id: nil, by_id: nil}
 
     test "list_rewards/0 returns all rewards" do
       reward = reward_fixture()
@@ -21,7 +21,7 @@ defmodule Rewardly.RewardsTest do
     end
 
     test "create_reward/1 with valid data creates a reward" do
-      valid_attrs = %{amount: 42, title: "some title"}
+      valid_attrs = %{amount: 42, title: "some title", user_id: 1, by_id: 2}
 
       assert {:ok, %Reward{} = reward} = Rewards.create_reward(valid_attrs)
       assert reward.amount == 42
