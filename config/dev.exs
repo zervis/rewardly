@@ -3,7 +3,7 @@ import Config
 # Configure your database
 config :rewardly, Rewardly.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "mobilehqm",
   hostname: "localhost",
   database: "rewardly_dev",
   stacktrace: true,
