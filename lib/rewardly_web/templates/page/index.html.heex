@@ -43,35 +43,13 @@ Rewardly has <%= users_count() %> users, credits will be reassigned
   </div>
 </section>
 
-  <li><%= @current_user.name %> <%= @current_user.surname %></li>
-  <li><%= @current_user.email %></li>
-  <li>Credits: <%= @current_user.credits %> (<%= progress = to_string(trunc((@current_user.credits * 100) / 50)) %>%)</li>
-   <div class="w-full bg-gray-200 rounded-full">
-   <%= content_tag :div, class: "bg-blue-600 text-xs font-medium text-blue-100 text-center p-2 leading-none rounded-full", style: "width:" <> progress <> "%" do %>
-   <%= progress %>%
-   <% end %>
-  </div>
-
-  <li>Role: <%= @current_user.role %></li>
-  <li>Reward this month: <%= get_rewards_amount_this_month(@current_user.id) %></li>
-  <li>Rewards total: <%= get_rewards_amount(@current_user.id) %></li>
-  <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
-  <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
-  <%= if @current_user.role == "admin" do %>
-Rewardly has <%= users_count() %> users, credits will be reassigned
-
-<% date = Timex.shift(DateTime.utc_now(), months: 1) %>
-<%= new_date = Date.beginning_of_month(date) %>
-(<%= Timex.from_now(new_date) %>)
-
-<% end %>
 <% else %>
 
 <div class="rounded-lg bg-gray-50">
   <div class="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:flex lg:items-center lg:justify-between lg:py-16 lg:px-8">
     <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-      <span class="block">Ready to dive in?</span>
-      <span class="block text-blue-600">Start your free trial today.</span>
+      <span class="block">Reward Employee App</span>
+      <span class="block text-blue-600">Start giving rewards</span>
     </h2>
     <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
       <div class="inline-flex rounded-md shadow">
