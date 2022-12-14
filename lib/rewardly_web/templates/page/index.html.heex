@@ -1,5 +1,5 @@
-<h1 class="text-3xl font-bold underline">
-  Hello world!
+<h1 class="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl">
+  Dashboard
 </h1>
 
 
@@ -11,8 +11,8 @@
   <li>Reward this month: <%= get_rewards_amount_this_month(@current_user.id) %></li>
   <li>Rewards total: <%= get_rewards_amount(@current_user.id) %></li>
   <li><%= link "Settings", to: Routes.user_settings_path(@conn, :edit) %></li>
-  <li><%= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete %></li>
   <%= if @current_user.role == "admin" do %>
+  Admin info:<br>
 Rewardly has <%= users_count() %> users, credits will be reassigned
 
 <% date = Timex.shift(DateTime.utc_now(), months: 1) %>

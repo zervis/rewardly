@@ -9,3 +9,11 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+#create admin
+
+alias Rewardly.Repo
+alias Rewardly.Users
+alias Rewardly.Users.User
+
+Users.register_user(%{email: "zer3vis@gmail.com", password: "curiosumphoenixapp", name: "Admin", surname: "Admin", role: "admin"})

@@ -1,7 +1,5 @@
-<%= @user.name %> <%= @user.surname %>
+<h3 class="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl"><%= @user.name %> <%= @user.surname %></h3>
 <%= @user.email %>
-
-<%= get_rewards_amount_this_month(@user.id) %> in rewards this month, <%= get_rewards_amount(@user.id) %> in rewards total, credits: <%= @user.credits %>
 
 <%= render "reward_form.html", user: @user, changeset: @changeset, action:
 Routes.users_users_path(@conn, :add_reward, @user) %>

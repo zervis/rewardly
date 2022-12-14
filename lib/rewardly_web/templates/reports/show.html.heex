@@ -1,7 +1,7 @@
 <% date_with_time = @date <> " 00:00:00" 
  date = NaiveDateTime.from_iso8601!(date_with_time) %>
 
-<h5> <%= Timex.month_name(date.month) %> <%= date.year %></h5>
+<h5 class="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl"> <%= Timex.month_name(date.month) %> <%= date.year %></h5>
 
 <div class="overflow-x-auto relative shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
