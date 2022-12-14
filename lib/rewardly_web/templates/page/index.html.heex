@@ -1,9 +1,7 @@
+<%= if @current_user do %>
 <h1 class="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl">
   Dashboard
 </h1>
-
-
-<%= if @current_user do %>
   <li><%= @current_user.name %> <%= @current_user.surname %></li>
   <li><%= @current_user.email %></li>
   <li>Credits: <%= @current_user.credits %></li>
@@ -21,6 +19,9 @@ Rewardly has <%= users_count() %> users, credits will be reassigned
 
 <% end %>
 <% else %>
+<h1 class="mb-4 text-2xl font-extrabold tracking-tight leading-none text-gray-900 md:text-3xl">
+  Reward Employees
+</h1>
   <li><%= link "Register", to: Routes.user_registration_path(@conn, :new) %></li>
   <li><%= link "Log in", to: Routes.user_session_path(@conn, :new) %></li>
 <% end %>
