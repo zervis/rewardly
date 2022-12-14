@@ -67,7 +67,7 @@ defmodule RewardlyWeb.UsersController do
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Users.get_user!(id)
+    user = conn.assigns.current_user
     #current_user = conn.assigns.current_user
 
     if user.role == "admin" do
