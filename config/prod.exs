@@ -20,7 +20,7 @@ config :logger, level: :info
 # to the previous section and set your `:url` port to 443:
 #
      config :rewardly, RewardlyWeb.Endpoint,
-     url: [scheme: "https", host: "calm-escarpment-80575.herokuapp.com", port: 443],
+     url: [scheme: "https", host: "rewardly-heroku-20.herokuapp.com", port: 443],
      force_ssl: [rewrite_on: [:x_forwarded_proto]],
 #
 # The `cipher_suite` is set to `:strong` to support only the
