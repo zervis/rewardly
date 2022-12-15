@@ -16,4 +16,4 @@ alias Rewardly.Repo
 alias Rewardly.Users
 alias Rewardly.Users.User
 
-Users.register_user(%{email: "zervis@gmail.com", password: "curiosumphoenixapp", name: "Admin", surname: "Admin", role: "admin"})
+Users.register_user(%{email: "jobs@curiosum.com", password: "curiosumphoenixapp", name: "Super", surname: "Admin", role: "admin"})
